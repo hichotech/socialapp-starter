@@ -1,6 +1,6 @@
 import React from "react";
 import DataService from '../../DataService'
-import DeleteMessage from "../deleteMessage/DeleteMessage";
+
 
 import Message from '../message/Message'
 
@@ -25,7 +25,7 @@ componentDidMount () {
                         
                         
                     ))}
-                   <DeleteMessage />
+                   
                 </ul>
 
             </div>

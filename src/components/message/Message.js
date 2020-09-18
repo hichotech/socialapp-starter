@@ -1,8 +1,7 @@
 import React from 'react'
 import DataService from '../../DataService'
 import './messages.css'
-import DeleteMessage from '../deleteMessage/DeleteMessage'
-import DataService from '../../DataService'
+
 
 class Message extends React.Component {
 constructor(props){
@@ -10,24 +9,12 @@ constructor(props){
     this.client = new DataService()
 }
 
-handleDelete= (event) => {
-    return this.client.deleteMessage(203)
-}
-    constructor(props){
-        super(props)
-        this.client = new DataService()
-    }
-    
-  
         
         handleChange =(event)=> {
              console.log(this.props.id)
             // this.client.deletmessages()
             return this.client.deleteMessages(this.props.id)
-
-           
-
-            
+    
         }
 
     render() {
@@ -47,7 +34,7 @@ handleDelete= (event) => {
                 <div className="message-text">{this.props.text}</div>
                 <div className="likes">&#128077;  : {this.props.likes.length}</div>
                 
-                <button onClick={() => this.handleDelete()}>Delete</button>
+            
 
 
             </li>
