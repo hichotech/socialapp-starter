@@ -50,9 +50,14 @@ class DataService {
      
  
 
-    deleteUser(event) {
-        let loginData = localStorage.getItem('login')
-        return this.client.delete(this.url + "/users{username}", loginData);
+    deleteUser(username) {
+        let authData = JSON.parse(localStorage.getItem('login'))
+        return this.client.delete(this.url +"/users/"+ username,{
+            headers: {
+                Authorization: `Bearer ${authData.result.token}`,
+                'Content-Type': 'application/json'
+            }
+        });
     }
 
 }

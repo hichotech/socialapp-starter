@@ -4,16 +4,15 @@ import DataService from "../../DataService"
 class DeleteUser extends React.Component {
     constructor(props) {
       super(props)
-      this.state = {
-          username: ""
-      };
+     
       this.client = new DataService();
     }
 
-    handleDelete = e => {
-      console.log('dog')
+    handleDelete = event => {
+        let authData = JSON.parse(localStorage.getItem('login'))
+      console.log(authData.result.username)
       
-       this.props.deleteUser();
+      return this.client.deleteUser(authData.result.username)
       };
 
   
@@ -21,7 +20,7 @@ render () {
     return (
         <div className='DeleteUser'>
         
-                {/* <button type="submit" onClick={this.handleDelete}>Delete User</button> */}
+                <button type="text" onClick={this.handleDelete}>Delete User</button>
             
         </div>
     )
@@ -32,6 +31,3 @@ export default DeleteUser;
 
 
 
-// deleteUser(username){
-//     return this.client.delete(this.url + "/users{username}", username);
-// }

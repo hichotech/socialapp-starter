@@ -1,23 +1,34 @@
 import React from 'react'
 import DataService from '../../DataService'
 import './messages.css'
+import { Link } from "react-router-dom"
+
 
 
 class Message extends React.Component {
 constructor(props){
     super(props)
+    this.state = {
+        submitted: false
+    }
     this.client = new DataService()
 }
 
         
         handleChange =(event)=> {
              console.log(this.props.id)
-            // this.client.deletmessages()
-            return this.client.deleteMessages(this.props.id)
+            
+           
+             this.client.deleteMessages(this.props.id).then(result => { this.setState({submitted: true})})
+            
     
         }
 
     render() {
+        if(this.state.submitted) {
+            return(<Link className='resetpage' to='/profile/:username'></Link>)
+            
+          }
         
         return (
             
