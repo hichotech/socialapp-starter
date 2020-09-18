@@ -41,6 +41,7 @@ class RegistrationForm extends React.Component {
     else {
     return (
       <div className="RegistrationForm">
+        
         <form id="registration-form" onSubmit={this.handleRegistration}>
           <label htmlFor="username">Username</label>
           <input
@@ -65,8 +66,8 @@ class RegistrationForm extends React.Component {
             required
             onChange={this.handleChange}
           />
-          <button type="submit" disabled={loading}>
-            Registor
+          <button className="registerbtn" type="submit" disabled={loading}>
+            Register
           </button>
         </form>
         <a href='./'>Log in!</a>

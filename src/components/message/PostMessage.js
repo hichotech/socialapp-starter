@@ -3,7 +3,7 @@ import DataService from "../../DataService"
 import Spinner from "react-spinkit";
 import { withAsyncAction } from "../../redux/HOCs";
 import { Input } from 'antd';
-
+import './messages.css';
 
 class PostMessage extends React.Component {
     constructor(props) {
@@ -11,7 +11,7 @@ class PostMessage extends React.Component {
       this.state = {
        text:''
          }
-         this.client = new DataService;
+         this.client = new DataService ();
     }
 
     
@@ -20,6 +20,7 @@ class PostMessage extends React.Component {
     let message = this.state.text
     console.log(message)
     this.client.postMessage(this.state.text)
+    this.setState({text:''})
     
     
   };
@@ -27,6 +28,7 @@ class PostMessage extends React.Component {
   handleChange = e => {
    
     this.setState({ [e.target.name]: e.target.value });
+  
   };
 
   render() {
@@ -39,14 +41,15 @@ class PostMessage extends React.Component {
         
         
         <TextArea rows={4} 
+         value={this.state.text}
          type="text"
          name="text"
          autoFocus
          required
          onChange={this.handleChange}/>
 
-          
-          <button type="submit" disabled={loading}>
+          <br />
+          <button className='post-msj-btn' type="submit" disabled={loading}>
             Post Message
           </button>
         </form>
