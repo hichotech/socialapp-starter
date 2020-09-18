@@ -34,6 +34,15 @@ class DataService {
         return this.client.get(`${this.url}/users?limit=${limit}`)
     }
 
+    deleteMessage (id) {
+        let authData = JSON.parse(localStorage.getItem('login'))
+        return this.client.delete(`${this.url}/messages/${id}`), {
+            headers: {
+                Authorization: `Bearer ${authData.result.token}`,
+                'Content-Type': 'application/json'
+            }
+        }
+    }
      
  
 

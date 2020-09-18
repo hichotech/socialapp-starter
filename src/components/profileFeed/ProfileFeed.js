@@ -1,5 +1,6 @@
 import React from "react";
 import DataService from '../../DataService'
+import DeleteMessage from "../deleteMessage/DeleteMessage";
 
 import Message from '../message/Message'
 
@@ -21,7 +22,10 @@ componentDidMount () {
                 <ul>
                 {this.state.messages.map(messageObject => (
                         <Message key={messageObject.id} {...messageObject} />
+                        
+                        
                     ))}
+                   <DeleteMessage />
                 </ul>
 
             </div>
