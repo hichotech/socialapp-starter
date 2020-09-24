@@ -4,12 +4,15 @@ import Spinner from "react-spinkit";
 import { withAsyncAction } from "../../redux/HOCs";
 import { Input } from 'antd';
 import './messages.css';
+import { Link } from "react-router-dom"
+import MessageFeed from '../../pages/MessageFeed'
 
 class PostMessage extends React.Component {
     constructor(props) {
       super(props)
       this.state = {
-       text:''
+       text:'',
+       submitted: false
          }
          this.client = new DataService ();
     }
@@ -34,6 +37,10 @@ class PostMessage extends React.Component {
   render() {
     const { loading, error } = this.props;
    const { TextArea } = Input;
+  //  if(this.state.submitted) {
+  //   return(<Link to='/messagefeed'></Link>)
+    
+  // }
     
     return (
       <div className="MessageForm">

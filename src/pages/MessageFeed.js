@@ -3,6 +3,8 @@ import DataService from '../DataService'
 import Menu from '../components/menu/Menu'
 import Message from '../components/message/Message'
 import PostMessage from '../components/message/PostMessage'
+import { userIsAuthenticated } from "../redux/HOCs";
+
 class MessageFeed extends React.Component {
 state = {messages: []}
 client = new DataService ()
@@ -19,16 +21,16 @@ componentDidMount () {
             
             <div className='messagefeed'>
                                
+                               <Menu isAuthenticated={this.props.isAuthenticated} />
                 
-                <Menu />
                                 <br />
 
 
                 
                 <br />
+                <h2 className='profile-title'>Message Feed</h2>
                 <PostMessage />
                 <a className="back-link-msjfeed" href='/profile/:username'>back to profile</a>
-                <h2>Message Feed</h2>
                 
                 <ul>
                     {this.state.messages.map(messageObject => (
@@ -45,4 +47,4 @@ componentDidMount () {
     }
 }
 
-export default MessageFeed
+export default userIsAuthenticated(MessageFeed);

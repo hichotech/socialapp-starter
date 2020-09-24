@@ -10,7 +10,7 @@ class Registration extends React.Component {
       <div className="Registration">
         <Menu />
         
-        <h2>Register Here</h2>
+        <h2 className='profile-title'>Register Here</h2>
         <RegistrationForm />
         
               </div>

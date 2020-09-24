@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { store } from "../src/redux"
 class DataService {
     constructor(url = 'https://socialapp-api.herokuapp.com', client = axios.create()) {
         this.url = url;
@@ -7,7 +8,7 @@ class DataService {
     registerUser(registrationData) {
         return this.client.post(this.url + "/users", registrationData);
     }
-
+    
     postMessage(message) {
         let authData = JSON.parse(localStorage.getItem('login'))
         return this.client.post(this.url + "/messages", { text: message }, {
@@ -17,7 +18,32 @@ class DataService {
             }
         });
     }
-    deleteMessages(Id) {
+
+    postLike(messageId) {
+         let authData = JSON.parse(localStorage.getItem('login'))
+        return this.client.post(this.url + "/likes", { messageId: messageId }, {
+            headers: {
+                Authorization: `Bearer ${authData.result.token}`,
+                'Content-Type': 'application/json'
+            }
+        });
+    }
+
+    deleteLike(likeId) {
+        const { username, token } = store.getState().auth.login.result
+       return this.client.delete(this.url + "/likes/" + likeId, { likeId: likeId }, {
+           headers: {
+               Authorization: `Bearer ${token}`,
+               'Content-Type': 'application/json'
+               
+               
+            }
+        });
+    }
+ 
+
+    
+    deleteMessages(Id){
         let authData = JSON.parse(localStorage.getItem('login'))
         return this.client.delete(this.url + "/messages/" + Id, {
             headers: {
@@ -25,11 +51,10 @@ class DataService {
                 'Content-Type': 'application/json'
             }
         });
-
         
-           
+        
+        
     }
-
     
 
 
@@ -49,22 +74,16 @@ class DataService {
      
  
 
-    deleteUser(event) {
-        let loginData = localStorage.getItem('login')
-        return this.client.delete(this.url + "/users{username}", loginData);
+    deleteUser(username) {
+        let authData = JSON.parse(localStorage.getItem('login'))
+        return this.client.delete(this.url +"/users/"+ username,{
+            headers: {
+                Authorization: `Bearer ${authData.result.token}`,
+                'Content-Type': 'application/json'
+            }
+        });
     }
 
-   postLikes(messageId) {
-       const data = { messageId }
-       const config = {
-           baseURL: this.url,
-           headers: {
-               Authorization: `Bearer ${this.result.token}`,
-               'content-Type': 'application/json'
-           }
-       }
-       return this.client.post(this.url + "/likes")
-    }
 
 
 

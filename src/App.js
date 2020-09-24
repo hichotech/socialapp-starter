@@ -6,6 +6,7 @@ import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
 import Registration from "./pages/Registration";
 import MessageFeed from './pages/MessageFeed'
+import Settings from './pages/Settings'
 
 class App extends React.Component {
  
@@ -34,6 +35,11 @@ class App extends React.Component {
           exact
           path="/messagefeed"
           component={MessageFeed}
+        />
+         <Route
+          exact
+          path="/settings"
+          component={Settings}
         />
         <Route
           exact

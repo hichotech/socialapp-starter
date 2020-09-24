@@ -1,6 +1,7 @@
 import React from "react";
 import DataService from '../../DataService'
 
+
 import Message from '../message/Message'
 
 class ProfileFeed extends React.Component {
@@ -21,7 +22,10 @@ componentDidMount () {
                 <ul>
                 {this.state.messages.map(messageObject => (
                         <Message key={messageObject.id} {...messageObject} />
+                        
+                        
                     ))}
+                   
                 </ul>
 
             </div>
