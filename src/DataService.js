@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { store } from "../src/redux"
+
 class DataService {
     constructor(url = 'https://socialapp-api.herokuapp.com', client = axios.create()) {
         this.url = url;
@@ -31,7 +31,7 @@ class DataService {
 
     deleteLike(likeId) {
         let authData = JSON.parse(localStorage.getItem('login'))
-       return this.client.delete(this.url + "/likes/" + likeId, { likeId: likeId }, {
+       return this.client.delete(this.url + "/likes/" + likeId, {
            headers: {
                Authorization: `Bearer ${ authData.result.token}`,
                'Content-Type': 'application/json'

@@ -25,14 +25,15 @@ class Message extends React.Component {
     }
 
     handleLike = (event) => {
-        console.log(this.state.likeCount)
-        this.setState({likeCount: this.state.likeCount + 1, likeId: this.props.likes.id})
+        
+        this.setState({likeCount: this.state.likeCount + 1})
         this.client.postLike(this.props.id)
-        console.log(this.props.likes.id)
+        
     }
 
     handleDislike = (event) => {
         const likeId = this.props.likes[0]
+        if(likeId === undefined) { return}
         console.log(this.props.likes)
         console.log(likeId.id)
         console.log(this.state.likeId)
