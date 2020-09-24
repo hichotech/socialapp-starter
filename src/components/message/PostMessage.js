@@ -5,7 +5,6 @@ import { withAsyncAction } from "../../redux/HOCs";
 import { Input } from 'antd';
 import './messages.css';
 
-
 class PostMessage extends React.Component {
     constructor(props) {
       super(props)
