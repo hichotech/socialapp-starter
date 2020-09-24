@@ -9,7 +9,7 @@ class Settings extends React.Component {
     return (
       <div className="Settings">
         <Menu isAuthenticated={this.props.isAuthenticated} />
-        <h2 className="settings-title">Settings</h2>
+        <h2 className="profile-title">Settings</h2>
         
         <DeleteUser />
 

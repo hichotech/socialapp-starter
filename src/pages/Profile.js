@@ -13,10 +13,6 @@ class Profile extends React.Component {
       <div className="Profile">
         <Menu isAuthenticated={this.props.isAuthenticated} />
         <h2 className="profile-title">Profile</h2>
-        
-        <DeleteUser 
-        username={this.props.user}
-        />
 
         <PostMessage />
         <br/>
