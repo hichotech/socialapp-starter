@@ -4,8 +4,6 @@ import Spinner from "react-spinkit";
 import { withAsyncAction } from "../../redux/HOCs";
 import { Input } from 'antd';
 import './messages.css';
-import { Link } from "react-router-dom"
-import MessageFeed from '../../pages/MessageFeed'
 
 class PostMessage extends React.Component {
     constructor(props) {
