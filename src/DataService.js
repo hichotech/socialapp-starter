@@ -30,20 +30,17 @@ class DataService {
     }
 
     deleteLike(likeId) {
-        const { username, token } = store.getState().auth.login.result
+        let authData = JSON.parse(localStorage.getItem('login'))
        return this.client.delete(this.url + "/likes/" + likeId, { likeId: likeId }, {
            headers: {
-               Authorization: `Bearer ${this.getToken() }`,
+               Authorization: `Bearer ${ authData.result.token}`,
                'Content-Type': 'application/json'
                
                
             }
         });
     }
-    getToken(){ 
-        const {token} = store.getState().auth.login.result 
-        return token 
-    }
+   
 
     
     deleteMessages(Id){
