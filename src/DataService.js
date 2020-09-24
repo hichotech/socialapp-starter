@@ -17,9 +17,9 @@ class DataService {
             }
         });
     }
-    deleteMessages(Id){
+    deleteMessages(Id) {
         let authData = JSON.parse(localStorage.getItem('login'))
-        return this.client.delete(this.url +"/messages/"+ Id,{
+        return this.client.delete(this.url + "/messages/" + Id, {
             headers: {
                 Authorization: `Bearer ${authData.result.token}`,
                 'Content-Type': 'application/json'
@@ -28,12 +28,12 @@ class DataService {
 
         
            
-        }
+    }
 
     
 
 
-     getFeed(limit = 20) {
+    getFeed(limit = 20) {
         
         return this.client.get(`${this.url}/messages?limit=${limit}`)
     }
@@ -42,7 +42,7 @@ class DataService {
         
         return this.client.get(`${this.url}/messages?username=${username}&limit=${limit}`)
     }
-    getuserlist (limit =15){
+    getuserlist(limit = 15) {
         return this.client.get(`${this.url}/users?limit=${limit}`)
     }
 
@@ -54,5 +54,29 @@ class DataService {
         return this.client.delete(this.url + "/users{username}", loginData);
     }
 
+   postLikes(messageId) {
+       const data = { messageId }
+       const config = {
+           baseURL: this.url,
+           headers: {
+               Authorization: `Bearer ${this.result.token}`,
+               'content-Type': 'application/json'
+           }
+       }
+       return this.client.post(this.url + "/likes")
+    }
+
+
+
+    getUsername() {
+        const { username } = JSON.parse(localStorage.getItem("login")).result.username
+        return username
+    }
+
+
+    getToken() {
+        const { token } = JSON.parse(localStorage.getItem("login")).result.token
+        return token
+    }
 }
 export default DataService;

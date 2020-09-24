@@ -5,15 +5,19 @@ import './messages.css'
 class Message extends React.Component {
     constructor(props){
         super(props)
+        this.state = {likeCount: this.props.likes.length}
         this.client = new DataService()
     }
     
-  
+    handleLike = () => {
+        console.log('Like')
+        this.setState({likeCount: this.latestState + 1})
+    }
         
         handleChange =(event)=> {
              console.log(this.props.id)
             // this.client.deletmessages()
-            return this.client.deleteMessages(this.props.id)
+            return this.client.deleteMessages(this.props.id).then(this.client.getProfileFeed())
 
            
 
@@ -35,8 +39,8 @@ class Message extends React.Component {
                 {this.props.username} posted:</div>
                 <br />
                 <div className="message-text">{this.props.text}</div>
-                <div className="likes">&#128077;  : {this.props.likes.length}</div>
-
+                <div className="likes">&#128077;  : {this.state.likeCount}</div>
+                
             </li>
             </div>
             
