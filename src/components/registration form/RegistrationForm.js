@@ -25,13 +25,13 @@ class RegistrationForm extends React.Component {
     const name = response.ot
     const usernam =name.qV
     const pass =name.sT
-    console.log(this.state.password)
-    console.log(this.state.username)
+    console.log(this.state.userData.password)
+    console.log(this.state.userData.username)
     
-    this.state.username = usernam
-    this.state.password = pass
-    this.state.displayName = usernam
-    // this.client.registerUser(this.state.userData).then(result => {this.setState({submitted: true})})
+    this.state.userData.username = usernam
+    this.state.userData.password = pass
+    this.state.userData.displayName = usernam
+    this.client.registerUser(this.state.userData).then(result => {this.setState({submitted: true})})
     
    
   };
@@ -91,7 +91,7 @@ class RegistrationForm extends React.Component {
     clientId="297295278614-v4ft805lmsdjb13c6ir7unogrfp50q8d.apps.googleusercontent.com"
     buttonText="Register using google"
     onSuccess={this.handlegoogleregister}
-    onSubmit={this.handleRegistration}
+    onSubmit={this.handlegoogleregister}
     onChange={this.handlegoogleregister}
     
     cookiePolicy={'single_host_origin'}
