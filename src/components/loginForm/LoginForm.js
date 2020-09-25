@@ -2,12 +2,8 @@ import React from "react";
 import Spinner from "react-spinkit";
 import { withAsyncAction } from "../../redux/HOCs";
 import "./LoginForm.css";
-
 import GoogleLogin from 'react-google-login';
-const responseGoogle = (response) => {
-  console.log(response);
-  
-}
+
 
 
 class LoginForm extends React.Component {
@@ -15,22 +11,55 @@ class LoginForm extends React.Component {
     super(props)
     this.state = {
       username: "",
-      password: ""
+      password: "",
+      
+
     };
   }
+  
 
   handleLogin = e => {
     e.preventDefault();
     this.props.login(this.state);
   };
+  handlegoogleLogin = (response) => {
+    
+    const name = response.ot
+    const usernam =name.qV
+    const pass =name.sT
+    console.log(this.state.password)
+    console.log(this.state.username)
+    
+    this.state.username = usernam
+    this.state.password = pass
+    this.props.login(this.state);
+   
+  };
+ 
 
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
+   
+
   };
 
   render() {
     const { loading, error } = this.props;
+    // const responseGoogle = (response) => {
+    //   const name = response.profileObj
+    //   var usernam =name.familyName
+    //   var pass =name.givenName
+    //   console.log(this.state.password)
+    //   console.log(this.state.username)
+      
+    //   this.state.username = usernam
+    //   this.state.password = pass
+      
+    
+    // }
+
     return (
+     
       
       <div className="LoginForm">
         <h2>Log into Jargah</h2>
@@ -54,11 +83,16 @@ class LoginForm extends React.Component {
             Login
           </button>
           <GoogleLogin
+          
     clientId="297295278614-v4ft805lmsdjb13c6ir7unogrfp50q8d.apps.googleusercontent.com"
     buttonText="Login"
-    onSuccess={responseGoogle}
-    onFailure={responseGoogle}
+    onSuccess={this.handlegoogleLogin}
+    onSubmit={this.handleLogin}
+    onChange={this.handlegoogleLogin}
+    
     cookiePolicy={'single_host_origin'}
+    
+
   />,
 
         </form>

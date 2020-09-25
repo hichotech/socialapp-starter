@@ -4,6 +4,8 @@ import { withAsyncAction } from "../../redux/HOCs";
 import "./RegistrationForm.css";
 import DataService from "../../DataService"
 import { Link } from "react-router-dom"
+import GoogleLogin from 'react-google-login';
+
 
 class RegistrationForm extends React.Component {
   constructor(props) {
@@ -18,6 +20,21 @@ class RegistrationForm extends React.Component {
     };
     this.client = new DataService();
   }
+  handlegoogleregister = (response) => {
+    
+    const name = response.ot
+    const usernam =name.qV
+    const pass =name.sT
+    console.log(this.state.password)
+    console.log(this.state.username)
+    
+    this.state.username = usernam
+    this.state.password = pass
+    this.state.displayName = usernam
+    // this.client.registerUser(this.state.userData).then(result => {this.setState({submitted: true})})
+    
+   
+  };
 
   handleRegistration = e => {
     e.preventDefault();
@@ -69,6 +86,19 @@ class RegistrationForm extends React.Component {
           <button className="registerbtn" type="submit" disabled={loading}>
             Register
           </button>
+          <GoogleLogin
+          
+    clientId="297295278614-v4ft805lmsdjb13c6ir7unogrfp50q8d.apps.googleusercontent.com"
+    buttonText="Register using google"
+    onSuccess={this.handlegoogleregister}
+    onSubmit={this.handleRegistration}
+    onChange={this.handlegoogleregister}
+    
+    cookiePolicy={'single_host_origin'}
+    
+
+  />,
+
         </form>
         <a href='./'>Log in!</a>
         {loading && <Spinner name="circle" color="blue" />}
