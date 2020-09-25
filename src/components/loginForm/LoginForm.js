@@ -2,6 +2,7 @@ import React from "react";
 import Spinner from "react-spinkit";
 import { withAsyncAction } from "../../redux/HOCs";
 import "./LoginForm.css";
+import GoogleLogin from "react-google-login"
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -22,6 +23,9 @@ class LoginForm extends React.Component {
   };
 
   render() {
+    const responseGoogle = (response) => {
+      console.log(response);
+    }
     const { loading, error } = this.props;
     return (
       
@@ -48,6 +52,14 @@ class LoginForm extends React.Component {
           </button>
 
         </form>
+        <GoogleLogin
+    clientId="https://socialapp-api.herokuapp.com/auth/google/callback"
+
+    buttonText="Login"
+    onSuccess={this.handleLogin}
+    onFailure={responseGoogle}
+    cookiePolicy={'single_host_origin'}
+  />
         <a href='./Registration'>Register Here</a>
         {loading && <Spinner name="circle" color="blue" />}
         {error && <p style={{ color: "red" }}>{error.message}</p>}

@@ -6,6 +6,10 @@ class DataService {
         this.url = url;
         this.client = client;
     }
+
+    googleLogin() {
+        return this.client.get(this.url + "/auth/google/login")
+    }
     registerUser(registrationData) {
         return this.client.post(this.url + "/users", registrationData);
     }
