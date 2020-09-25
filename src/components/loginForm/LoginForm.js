@@ -4,6 +4,13 @@ import { withAsyncAction } from "../../redux/HOCs";
 import "./LoginForm.css";
 import GoogleLogin from "react-google-login"
 
+import GoogleLogin from 'react-google-login';
+const responseGoogle = (response) => {
+  console.log(response);
+  
+}
+
+
 class LoginForm extends React.Component {
   constructor(props) {
     super(props)
@@ -50,6 +57,13 @@ class LoginForm extends React.Component {
           <button className="login-btn" type="submit" disabled={loading}>
             Login
           </button>
+          <GoogleLogin
+    clientId="297295278614-v4ft805lmsdjb13c6ir7unogrfp50q8d.apps.googleusercontent.com"
+    buttonText="Login"
+    onSuccess={responseGoogle}
+    onFailure={responseGoogle}
+    cookiePolicy={'single_host_origin'}
+  />,
 
         </form>
         <GoogleLogin
