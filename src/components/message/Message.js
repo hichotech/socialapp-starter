@@ -11,8 +11,7 @@ class Message extends React.Component {
         this.state = {
             submitted: false,
             likeCount: this.props.likes.length,
-            likes: [this.props.likes],
-            likeId: this.props.likes.id
+            messageLikedId: 0
         }
         this.client = new DataService()
     }
@@ -26,40 +25,45 @@ class Message extends React.Component {
     }
 
     handleLike = (event) => {
-   
-        this.client.postLike(this.props.id).then(result => { this.setState({ likeCount: this.state.likeCount + 1, likeId: this.props.likes.id }) })
-        console.log(this.state)
-            /*this.setState({ likeCount: this.state.likeCount + 1 })
-            this.client.postLike(this.props.id)*/
-        }
-    
-    
+        
+        this.setState({likeCount: this.state.likeCount + 1, messageLikedId: this.props.id})
+        this.client.postLike(this.props.id)
+        console.log(this.state.messageLikedId)
+        
+    }
 
     handleDislike = (event) => {
-
-        
-                
-       
-         const Id = this.props.likes.id
-        this.setState({ likeCount: this.state.likeCount - 1 })
-        this.client.deleteLike(Id)
-        
-    }
-
-    componentDidMount() {
+        console.log(this.props.likes)
         const username = this.client.getUsername()
         const likesArray = this.props.likes
-        const index = 0
+        let index = 0
+        while(index < likesArray.length) {
+            console.log(username)
+            console.log(likesArray[index].username)
+
+            if(likesArray[index].username === username) {
+                console.log(likesArray[index].id)
+                this.client.deleteLike(likesArray[index].id)
+            }
+            index += 1
+        }
+       
+    }
+
+    checkLikeArray () {
         
     }
 
-
     render() {
+
+        
         if (this.state.submitted) {
             return (<Link className='resetpage' to='/profile/:username'></Link>)
 
         }
 
+        
+       
         return (
 
 
@@ -75,7 +79,7 @@ class Message extends React.Component {
                     <div className="message-text">{this.props.text}</div>
                     <div className="likes">
                         <button className='likebutton' onClick={this.handleLike}>&#128077;</button>
-                        <button className='dislikebutton' onClick={this.handleDislike}>&#128077;</button>
+                        <button className='dislikebutton' onClick={this.handleDislike}>dislike</button>
                 : {this.state.likeCount}
                     </div>
 
