@@ -11,8 +11,8 @@ class Message extends React.Component {
         this.state = {
             submitted: false,
             likeCount: this.props.likes.length,
-            likes: [this.props.likes]
-
+            likes: [this.props.likes],
+            likeId: this.props.likes.id
         }
         this.client = new DataService()
     }
@@ -22,22 +22,34 @@ class Message extends React.Component {
 
 
         this.client.deleteMessages(this.props.id).then(result => { this.setState({ submitted: true }) })
+        
     }
 
     handleLike = (event) => {
    
-        
-            this.setState({ likeCount: this.state.likeCount + 1 })
-            this.client.postLike(this.props.id)
+        this.client.postLike(this.props.id).then(result => { this.setState({ likeCount: this.state.likeCount + 1, likeId: this.props.likes.id }) })
+        console.log(this.state)
+            /*this.setState({ likeCount: this.state.likeCount + 1 })
+            this.client.postLike(this.props.id)*/
         }
     
     
 
     handleDislike = (event) => {
-        let username = this.client.getUsername()
-         const Id = this.props.likes[username]
+
+        
+                
+       
+         const Id = this.props.likes.id
         this.setState({ likeCount: this.state.likeCount - 1 })
-        this.client.deleteLike(Id.id)
+        this.client.deleteLike(Id)
+        
+    }
+
+    componentDidMount() {
+        const username = this.client.getUsername()
+        const likesArray = this.props.likes
+        const index = 0
         
     }
 

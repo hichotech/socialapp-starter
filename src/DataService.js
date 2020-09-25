@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { store } from "../src/redux"
+
 class DataService {
     constructor(url = 'https://socialapp-api.herokuapp.com', client = axios.create()) {
         this.url = url;
@@ -21,31 +21,33 @@ class DataService {
 
     postLike(messageId) {
          let authData = JSON.parse(localStorage.getItem('login'))
-        return this.client.post(this.url + "/likes", { messageId: messageId }, {
+        return      this.client.post(this.url + "/likes", { messageId: messageId }, {
             headers: {
                 Authorization: `Bearer ${authData.result.token}`,
                 'Content-Type': 'application/json'
             }
-        });
+           
+        }).then(console.log(this.state))
+            ;
+
     }
 
-    deleteLike(likeId) {
-        const { username, token } = store.getState().auth.login.result
-       return this.client.delete(this.url + "/likes/" + likeId, { likeId: likeId }, {
-           headers: {
-               Authorization: `Bearer ${token}`,
-               'Content-Type': 'application/json'
-               
-               
-            }
-        });
-    }
- 
+    deleteLike(likesId) {
+        
+            let authData = JSON.parse(localStorage.getItem('login'))
+           return this.client.delete(this.url + "/likes/", { likesId: likesId}, {
+               headers: {
+                   Authorization: `Bearer ${authData.result.token}`,
+                   'Content-Type': 'application/json'
+               }
+           });
+       }
+   
 
     
-    deleteMessages(Id){
+    deleteMessages(id){
         let authData = JSON.parse(localStorage.getItem('login'))
-        return this.client.delete(this.url + "/messages/" + Id, {
+        return this.client.delete(this.url +"/messages/"+ id ,{
             headers: {
                 Authorization: `Bearer ${authData.result.token}`,
                 'Content-Type': 'application/json'
