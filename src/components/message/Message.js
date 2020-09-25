@@ -11,7 +11,7 @@ class Message extends React.Component {
         this.state = {
             submitted: false,
             likeCount: this.props.likes.length,
-            madeLike: false
+            messageLikedId: 0
         }
         this.client = new DataService()
     }
@@ -26,53 +26,44 @@ class Message extends React.Component {
 
     handleLike = (event) => {
         
-        this.setState({likeCount: this.state.likeCount + 1, madeLike: true})
+        this.setState({likeCount: this.state.likeCount + 1, messageLikedId: this.props.id})
         this.client.postLike(this.props.id)
+        console.log(this.state.messageLikedId)
         
     }
 
     handleDislike = (event) => {
-        const likeId = this.props.likes[0]
-        
         console.log(this.props.likes)
-        console.log(likeId.id)
-        console.log(this.state.likeId)
-        this.setState({likeCount: this.state.likeCount - 1, madeLike: false})
-        this.client.deleteLike(likeId.id)
+        const username = this.client.getUsername()
+        const likesArray = this.props.likes
+        let index = 0
+        while(index < likesArray.length) {
+            console.log(username)
+            console.log(likesArray[index].username)
+
+            if(likesArray[index].username === username) {
+                console.log(likesArray[index].id)
+                this.client.deleteLike(likesArray[index].id)
+            }
+            index += 1
+        }
+       
     }
 
+    checkLikeArray () {
+        
+    }
 
     render() {
+
+        
         if (this.state.submitted) {
             return (<Link className='resetpage' to='/profile/:username'></Link>)
 
         }
-        else if (this.state.madeLike) {
-            return (
-                <div className="feedbox">
 
-
-                <li className='messagesfeed'>
-                    <button type="text" onClick={this.handleChange}>delete</button>
-
-                    <div className="date"> At {new Date(this.props.createdAt).toDateString()},
-                {this.props.username} posted:</div>
-                    <br />
-                    <div className="message-text">{this.props.text}</div>
-                    <div className="likes">
-                       
-                        <button className='dislikebutton' onClick={this.handleDislike}>dislike</button>
-                : {this.state.likeCount}
-                    </div>
-
-
-
-
-                </li>
-            </div>
-            )
-        }
-
+        
+       
         return (
 
 
@@ -88,7 +79,7 @@ class Message extends React.Component {
                     <div className="message-text">{this.props.text}</div>
                     <div className="likes">
                         <button className='likebutton' onClick={this.handleLike}>&#128077;</button>
-                       
+                        <button className='dislikebutton' onClick={this.handleDislike}>dislike</button>
                 : {this.state.likeCount}
                     </div>
 

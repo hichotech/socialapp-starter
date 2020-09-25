@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { store } from "../src/redux"
 
 class DataService {
     constructor(url = 'https://socialapp-api.herokuapp.com', client = axios.create()) {
@@ -70,6 +71,14 @@ class DataService {
     getuserlist (limit =15){
         return this.client.get(`${this.url}/users?limit=${limit}`)
     }
+
+    getUsername() {
+        const { username } = store.getState().auth.login.result
+        console.log(username)
+        return username
+    }
+
+
 
      
  
