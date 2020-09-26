@@ -32,7 +32,9 @@ calerlocalstorage(){
 }
 render () {
   if(this.state.submitted === true) {
-    return (<Link className='resetpage' onClick={this.calerlocalstorage}>User Deleted</Link>)
+    
+    return (<Link className='resetpage' onClick={this.calerlocalstorage}> To home page </Link>)
+   
     
     
   }
