@@ -16,6 +16,7 @@ class DeleteUser extends React.Component {
 
     handleDelete = event => {
         let authData = JSON.parse(localStorage.getItem('login'))
+        window.location.reload()
       console.log(authData.result.username)
       
       return this.client.deleteUser(authData.result.username)
@@ -26,7 +27,9 @@ class DeleteUser extends React.Component {
 
 }
 calerlocalstorage(){
-  return window.localStorage.removeItem('login') 
+  return window.localStorage.removeItem('login')
+  
+
 }
       
       
