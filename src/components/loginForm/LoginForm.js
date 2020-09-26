@@ -12,55 +12,51 @@ class LoginForm extends React.Component {
     this.state = {
       username: "",
       password: "",
-      
+
 
     };
   }
-  
+
 
   handleLogin = e => {
     e.preventDefault();
     this.props.login(this.state);
   };
   handlegoogleLogin = (response) => {
-    
+
     const name = response.ot
-    const usernam =name.qV
-    const pass =name.Ad
+    const usernam = name.qV
+    const pass = name.Ad
     console.log(this.state.password)
     console.log(this.state.username)
-    
-    this.state.username = usernam
-    this.state.password = pass
+
+    // this.state.username = usernam
+    // this.state.password = pass
+    {
+      this.setState({
+        username: usernam,
+        password: pass
+      })
+    }
+
     this.props.login(this.state);
-   
+
   };
- 
+
 
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
-   
+
 
   };
 
   render() {
     const { loading, error } = this.props;
-    // const responseGoogle = (response) => {
-    //   const name = response.profileObj
-    //   var usernam =name.familyName
-    //   var pass =name.givenName
-    //   console.log(this.state.password)
-    //   console.log(this.state.username)
-      
-    //   this.state.username = usernam
-    //   this.state.password = pass
-      
-    
-    // }
+
 
     return (
-     
-      
+
+
       <div className="LoginForm">
         <h2>Log into Jargah</h2>
         <form id="login-form" onSubmit={this.handleLogin}>
@@ -83,16 +79,16 @@ class LoginForm extends React.Component {
             Login
           </button>
           <GoogleLogin
-          
-    clientId="297295278614-v4ft805lmsdjb13c6ir7unogrfp50q8d.apps.googleusercontent.com"
-    buttonText="Login"
-    onSuccess={this.handlegoogleLogin}
-    onSubmit={this.handleLogin}
-    onChange={this.handlegoogleLogin}
-    cookiePolicy={'single_host_origin'}
-    
 
-  />,
+            clientId="297295278614-v4ft805lmsdjb13c6ir7unogrfp50q8d.apps.googleusercontent.com"
+            buttonText="Login"
+            onSuccess={this.handlegoogleLogin}
+            onSubmit={this.handleLogin}
+            onChange={this.handlegoogleLogin}
+            cookiePolicy={'single_host_origin'}
+
+
+          />,
 
         </form>
         <a href='./Registration'>Register Here</a>

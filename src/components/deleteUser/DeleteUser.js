@@ -16,9 +16,7 @@ class DeleteUser extends React.Component {
 
     handleDelete = event => {
         let authData = JSON.parse(localStorage.getItem('login'))
-        window.location.reload()
       console.log(authData.result.username)
-      
       return this.client.deleteUser(authData.result.username)
       .then(result => 
         {this.setState({submitted: true})
@@ -27,17 +25,14 @@ class DeleteUser extends React.Component {
 
 }
 calerlocalstorage(){
-  return window.localStorage.removeItem('login')
-  
+  return  window.location.reload().then(window.localStorage.removeItem('login')
+  )
+
 
 }
-      
-      
-
-  // {this.setState({submitted: true})}
 render () {
   if(this.state.submitted === true) {
-    return (<Link className='resetpage' to='/'>User Deleted</Link>)
+    return (<Link className='resetpage' onClick={this.calerlocalstorage}>User Deleted</Link>)
     
     
   }
@@ -46,7 +41,7 @@ render () {
         <div className='DeleteUser'>
         
                 <button type="text" 
-                    onClick={this.calerlocalstorage()} 
+                    // onSubmit={this.calerlocalstorage} 
 
                 onClick={this.handleDelete} >Delete User</button>
             
