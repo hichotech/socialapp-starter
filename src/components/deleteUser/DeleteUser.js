@@ -20,12 +20,13 @@ class DeleteUser extends React.Component {
       console.log(authData.result.username)
       
       return this.client.deleteUser(authData.result.username).then(result => Logout() )
+      
       };
 
   // {this.setState({submitted: true})}
 render () {
-  if(this.state.submitted) {
-    return(<Link className='resetpage' to='/'>User Deleted</Link>)
+  if(this.state.submitted === true) {
+    return (<Link className='resetpage' to='/'>User Deleted</Link>)
     
   }
     return (

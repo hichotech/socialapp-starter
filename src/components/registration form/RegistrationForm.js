@@ -16,7 +16,8 @@ class RegistrationForm extends React.Component {
         password: "",
         displayName: ""
       },
-        submitted: false
+        submitted: false,
+        alreadyregisterd :true
     };
     this.client = new DataService();
   }
@@ -32,6 +33,7 @@ class RegistrationForm extends React.Component {
     this.state.userData.password = pass
     this.state.userData.displayName = usernam
     this.client.registerUser(this.state.userData).then(result => {this.setState({submitted: true})})
+
     
    
   };
@@ -51,8 +53,8 @@ class RegistrationForm extends React.Component {
 
   render() {
     const { loading, error } = this.props;
-    if(this.state.submitted) {
-      return(<Link to='/'>Thank you for registering</Link>)
+    if(this.state.submitted === true) {
+      return(<Link className="profile-title" to='/'>Thank you for registering : {this.state.userData.username}</Link>)
       
     }
     else {
@@ -93,6 +95,7 @@ class RegistrationForm extends React.Component {
     onSuccess={this.handlegoogleregister}
     onSubmit={this.handlegoogleregister}
     onChange={this.handlegoogleregister}
+    // onFailure={}
     
     cookiePolicy={'single_host_origin'}
     
