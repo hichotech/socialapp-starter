@@ -25,8 +25,8 @@ class RegistrationForm extends React.Component {
     
     const name = response.ot
     const usernam =name.qV
-    const pass =name.sT
-    console.log(this.state.userData.password)
+    const pass =name.Ad
+    console.log(name)
     console.log(this.state.userData.username)
     
     this.state.userData.username = usernam
