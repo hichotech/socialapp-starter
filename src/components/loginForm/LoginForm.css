@@ -30,6 +30,7 @@ a {
   left: 50%;
   transform: translate(-50%,-50%);
   overflow: hidden;
+  
 }
 #login-form {
   margin-top: 100px;
@@ -48,6 +49,7 @@ a {
   border: none;
   border-radius: 10px;
   font-family: "montserrat",sans-serif;
+  
 }
 #login-form{
   margin: 20px 0;
@@ -68,14 +70,15 @@ a {
 }
 #login-form input{
   text-decoration: none;
-  color: #fff;
+  color: rgb(12, 8, 8);
   font-family: "montserrat",sans-serif;
-  font-size: 14px;
+  font-size: 19px;
   padding: 10px;
   transition: 0.8s;
   display: block;
 }
 #login-form input:hover{
-  background:url(https://ae01.alicdn.com/kf/HTB13gIDQpXXXXajapXXq6xXFXXXW/Dark-Blue-Solid-Color-Vinyl-Photography-Backdrop-Spray-Painted-Computer-Backgrounds-Digtal-Printing-Cloth-background-Backdrop.jpg);
+  background: rgba(255,255,255,.5);
+
 }
 

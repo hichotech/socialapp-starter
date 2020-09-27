@@ -2,7 +2,11 @@ import React from "react";
 import Spinner from "react-spinkit";
 import { withAsyncAction } from "../../redux/HOCs";
 import "./LoginForm.css";
+<<<<<<< HEAD
 import GoogleLogin from "react-google-login"
+=======
+import GoogleLogin from 'react-google-login';
+>>>>>>> 11102efd546258a39c72e4dcfb42b7c59f4a54d0
 
 
 
@@ -11,17 +15,43 @@ class LoginForm extends React.Component {
     super(props)
     this.state = {
       username: "",
-      password: ""
+      password: "",
+
+
     };
   }
+
 
   handleLogin = e => {
     e.preventDefault();
     this.props.login(this.state);
   };
+  handlegoogleLogin = (response) => {
+
+    const name = response.ot
+    const usernam = name.qV
+    const pass = name.Ad
+    console.log(this.state.password)
+    console.log(this.state.username)
+
+    // this.state.username = usernam
+    // this.state.password = pass
+    {
+      this.setState({
+        username: usernam,
+        password: pass
+      })
+    }
+
+    this.props.login(this.state);
+
+  };
+
 
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
+
+
   };
 
   render() {
@@ -29,8 +59,11 @@ class LoginForm extends React.Component {
       console.log(response);
     }
     const { loading, error } = this.props;
+
+
     return (
-      
+
+
       <div className="LoginForm">
         <h2>Log into Jargah</h2>
         <form id="login-form" onSubmit={this.handleLogin}>
@@ -53,12 +86,16 @@ class LoginForm extends React.Component {
             Login
           </button>
           <GoogleLogin
-    clientId="297295278614-v4ft805lmsdjb13c6ir7unogrfp50q8d.apps.googleusercontent.com"
-    buttonText="Login"
-    onSuccess={responseGoogle}
-    onFailure={responseGoogle}
-    cookiePolicy={'single_host_origin'}
-  />,
+
+            clientId="297295278614-v4ft805lmsdjb13c6ir7unogrfp50q8d.apps.googleusercontent.com"
+            buttonText="Login"
+            onSuccess={this.handlegoogleLogin}
+            onSubmit={this.handleLogin}
+            onChange={this.handlegoogleLogin}
+            cookiePolicy={'single_host_origin'}
+
+
+          />,
 
         </form>
 
