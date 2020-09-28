@@ -4,7 +4,6 @@ import { userIsAuthenticated } from "../redux/HOCs";
 import DeleteUser from '../components/deleteUser/DeleteUser'
 import FindUser from '../components/finduser/FindUser'
 import UpdateUser from '../components/updateuser/UpdateUser'
-import Uploadimg from '../components/profilepicture/ProfilePicture'
 
 class Settings extends React.Component {
   render() {
@@ -18,7 +17,7 @@ class Settings extends React.Component {
         <br />
         <UpdateUser />
         <br />
-        <Uploadimg />
+        
 
         <DeleteUser />
 
