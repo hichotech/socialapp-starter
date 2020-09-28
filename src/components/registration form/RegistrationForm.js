@@ -27,19 +27,19 @@ class RegistrationForm extends React.Component {
     const name = response.ot
     const usernam = name.qV
     const pass = name.Ad
-    console.log(name)
+    console.log(response)
     console.log(this.state.userData.username)
-    {
+    
       this.setState({
         userData: {
-          username: usernam,
+          username: name.qv,
           password: pass,
           displayName: usernam
 
 
         }
       })
-    }
+    
 
     this.client.registerUser(this.state.userData).then(result => { this.setState({ submitted: true }) })
 
@@ -59,9 +59,18 @@ class RegistrationForm extends React.Component {
     userData[e.target.name] = e.target.value
     this.setState({ userData });
   };
+  // addErrorregister= e =>{
+  //   e.preventDefault();
+  //   if (this.state.submitted === false) {
+  //     return (<Link className="profile-title" to='/'>Faild</Link>)
+
+  //   }
+  // }
+  
 
   render() {
     const { loading, error } = this.props;
+    
     if (this.state.submitted === true) {
       return (<Link className="profile-title" to='/'>Thank you for registering : {this.state.userData.username}</Link>)
 
@@ -70,7 +79,7 @@ class RegistrationForm extends React.Component {
       return (
         <div className="RegistrationForm">
 
-          <form id="registration-form" onSubmit={this.handleRegistration}>
+          <form id="registration-form" onSubmit={this.handleRegistration} onChange={this.addErrorregister}>
             <label htmlFor="username">Username</label>
             <input
               type="text"
@@ -94,7 +103,7 @@ class RegistrationForm extends React.Component {
               required
               onChange={this.handleChange}
             />
-            <button className="registerbtn" type="submit" disabled={loading}>
+            <button className="registerbtn" type="submit" disabled={loading} >
               Register
           </button>
             <GoogleLogin

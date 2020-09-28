@@ -42,7 +42,7 @@ render () {
       
         <div className='DeleteUser'>
         
-                <button type="text" 
+                <button className='post-msj-btn'  type="text" 
                     // onSubmit={this.calerlocalstorage} 
 
                 onClick={this.handleDelete} >Delete User</button>

@@ -18,7 +18,7 @@ class Message extends React.Component {
 
 
     handleChange = (event) => {
-        console.log(this.props.id)
+        console.log(this.props)
 
 
         this.client.deleteMessages(this.props.id).then(result => { this.setState({ submitted: true }) })
@@ -50,9 +50,7 @@ class Message extends React.Component {
        
     }
 
-    checkLikeArray () {
-        
-    }
+
 
     render() {
 
@@ -73,12 +71,12 @@ class Message extends React.Component {
                 <li className='messagesfeed'>
                     <button type="text" onClick={this.handleChange}>delete</button>
 
-                    <div className="date"> At {new Date(this.props.createdAt).toDateString()},
-                {this.props.username} posted:</div>
+                    <div className="date"> posted by : {this.props.username} on : {new Date(this.props.createdAt).toDateString()}
+                 </div>
                     <br />
                     <div className="message-text">{this.props.text}</div>
                     <div className="likes">
-                        <button className='likebutton' onClick={this.handleLike}>&#128077;</button>
+                        <button className='likebutton' onClick={this.handleLike}><span role="img" aria-label="h">&#128077;</span> </button>
                         <button className='dislikebutton' onClick={this.handleDislike}>dislike</button>
                 : {this.state.likeCount}
                     </div>

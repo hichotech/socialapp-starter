@@ -32,12 +32,12 @@ class LoginForm extends React.Component {
 
     // this.state.username = usernam
     // this.state.password = pass
-    {
+    
       this.setState({
         username: usernam,
         password: pass
       })
-    }
+    
 
     this.props.login(this.state);
 
