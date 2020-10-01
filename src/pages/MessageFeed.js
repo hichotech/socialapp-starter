@@ -4,22 +4,35 @@ import Menu from '../components/menu/Menu'
 import Message from '../components/message/Message'
 import PostMessage from '../components/message/PostMessage'
 import { userIsAuthenticated } from "../redux/HOCs";
+import IntervalExample from '../components/setInterval/SetInterval'
+
 
 class MessageFeed extends React.Component {
-state = {messages: []}
-client = new DataService ()
+    state = {
+        messages: [],
+        refresh: false
+    }
+    client = new DataService ()
+    
+    componentDidMount () {
+       
 
-componentDidMount () {
-    this.client.getFeed().then(response => 
-        this.setState({ messages: response.data.messages})
-    )
-}
-
-
+            this.client.getFeed().then(response => 
+                this.setState({ messages: response.data.messages})
+                )
+       
+        
+    }
+    
+   
+    
+    
     render () {
         return (
             
             <div className='messagefeed'>
+                
+        
                                
                                <Menu isAuthenticated={this.props.isAuthenticated} />
                 
