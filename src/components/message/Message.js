@@ -16,12 +16,12 @@ class Message extends React.Component {
         this.client = new DataService()
     }
 
-
     handleChange = (event) => {
         console.log(this.props.id)
 
 
         this.client.deleteMessages(this.props.id).then(result => { this.setState({ submitted: true }) })
+        
     }
 
     handleLike = (event) => {

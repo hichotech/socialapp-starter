@@ -27,7 +27,7 @@ class LoginForm extends React.Component {
     const name = response.ot
     const usernam = name.qV
     const pass = name.Ad
-    console.log(this.state.password)
+    console.log(response)
     console.log(this.state.username)
 
     // this.state.username = usernam
@@ -51,6 +51,9 @@ class LoginForm extends React.Component {
   };
 
   render() {
+    const responseGoogle = (response) => {
+      console.log(response);
+    }
     const { loading, error } = this.props;
 
 
@@ -91,6 +94,7 @@ class LoginForm extends React.Component {
           />,
 
         </form>
+
         <a href='./Registration'>Register Here</a>
         {loading && <Spinner name="circle" color="blue" />}
         {error && <p style={{ color: "red" }}>{error.message}</p>}

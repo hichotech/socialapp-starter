@@ -4,29 +4,26 @@ import Menu from '../components/menu/Menu'
 import Message from '../components/message/Message'
 import PostMessage from '../components/message/PostMessage'
 import { userIsAuthenticated } from "../redux/HOCs";
-import IntervalExample from '../components/setInterval/SetInterval'
-
 
 class MessageFeed extends React.Component {
-    state = {
-        messages: [],
-        refresh: false
-    }
-    client = new DataService ()
-    
-    componentDidMount () {
-       
+state = {messages: []}
+client = new DataService ()
 
-            this.client.getFeed().then(response => 
-                this.setState({ messages: response.data.messages})
-                )
-       
-        
-    }
-    
+    intervalId
+    componentDidMount() {
+    this.getFeedData()
    
     
-    
+    }
+    componentWillUnmount() {
+        clearTimeout(this.intervalId)
+    }
+    getFeedData = () => {
+        this.client.getFeed().then(response => {
+            this.setState({ messages: response.data.messages })
+            this.intervalId = setTimeout(this.getFeedData.bind(this), 2000)
+        }      )
+    }
     render () {
         return (
             
