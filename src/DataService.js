@@ -108,5 +108,15 @@ class DataService {
         const { token } = JSON.parse(localStorage.getItem("login")).result.token
         return token
     }
+
+    uploadPicture(formData) {
+        const url = this.url + `/users/${this.getUsername()}/picture`
+        const config = {
+            headers: {
+                Authorization: `Bearer ${this.getToken()}`
+            }
+        }
+        this.client.put(url, formData, config)
+    }
 }
 export default DataService;

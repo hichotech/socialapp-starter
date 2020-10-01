@@ -2,11 +2,7 @@ import React from "react";
 import Spinner from "react-spinkit";
 import { withAsyncAction } from "../../redux/HOCs";
 import "./LoginForm.css";
-<<<<<<< HEAD
-import GoogleLogin from "react-google-login"
-=======
 import GoogleLogin from 'react-google-login';
->>>>>>> 11102efd546258a39c72e4dcfb42b7c59f4a54d0
 
 
 
@@ -31,7 +27,7 @@ class LoginForm extends React.Component {
     const name = response.ot
     const usernam = name.qV
     const pass = name.Ad
-    console.log(this.state.password)
+    console.log(response)
     console.log(this.state.username)
 
     // this.state.username = usernam
