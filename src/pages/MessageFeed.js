@@ -21,7 +21,7 @@ client = new DataService ()
     getFeedData = () => {
         this.client.getFeed().then(response => {
             this.setState({ messages: response.data.messages })
-            this.intervalId = setTimeout(this.getFeedData.bind(this), 2000)
+            this.intervalId = setTimeout(this.getFeedData.bind(this), 200)
         }      )
     }
     render () {
