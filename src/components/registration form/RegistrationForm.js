@@ -4,7 +4,6 @@ import { withAsyncAction } from "../../redux/HOCs";
 import "./RegistrationForm.css";
 import DataService from "../../DataService"
 import { Link } from "react-router-dom"
-import GoogleLogin from 'react-google-login';
 
 
 
@@ -15,37 +14,21 @@ class RegistrationForm extends React.Component {
       userData: {
         username: "",
         password: "",
-        displayName: ""
+        displayName: "",
+        
+         
+        
+        
       },
       submitted: false,
       alreadyregisterd: true
     };
     this.client = new DataService();
   }
-  handlegoogleregister = (response) => {
+ 
+    
 
-    const name = response.ot
-    const usernam = name.qV
-    const pass = name.Ad
-    console.log(name)
-    console.log(this.state.userData.username)
-    {
-      this.setState({
-        userData: {
-          username: usernam,
-          password: pass,
-          displayName: usernam
-
-
-        }
-      })
-    }
-
-    this.client.registerUser(this.state.userData).then(result => { this.setState({ submitted: true }) })
-
-
-
-  };
+  
 
   handleRegistration = e => {
     e.preventDefault();
@@ -59,9 +42,12 @@ class RegistrationForm extends React.Component {
     userData[e.target.name] = e.target.value
     this.setState({ userData });
   };
+ 
+  
 
   render() {
     const { loading, error } = this.props;
+    
     if (this.state.submitted === true) {
       return (<Link className="profile-title" to='/'>Thank you for registering : {this.state.userData.username}</Link>)
 
@@ -70,7 +56,7 @@ class RegistrationForm extends React.Component {
       return (
         <div className="RegistrationForm">
 
-          <form id="registration-form" onSubmit={this.handleRegistration}>
+          <form id="registration-form" onSubmit={this.handleRegistration} onChange={this.addErrorregister}>
             <label htmlFor="username">Username</label>
             <input
               type="text"
@@ -94,23 +80,10 @@ class RegistrationForm extends React.Component {
               required
               onChange={this.handleChange}
             />
-            <button className="registerbtn" type="submit" disabled={loading}>
+            <button className="registerbtn" type="submit" disabled={loading} >
               Register
           </button>
-            <GoogleLogin
-              className="google"
-
-              clientId="297295278614-v4ft805lmsdjb13c6ir7unogrfp50q8d.apps.googleusercontent.com"
-              buttonText="Register using google"
-              onSuccess={this.handlegoogleregister}
-              onSubmit={this.handlegoogleregister}
-              onChange={this.handlegoogleregister}
-
-
-              cookiePolicy={'single_host_origin'}
-
-
-            />,
+           
 
         </form>
           <a href='./'>Log in!</a>

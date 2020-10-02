@@ -2,8 +2,6 @@ import React from "react";
 import Spinner from "react-spinkit";
 import { withAsyncAction } from "../../redux/HOCs";
 import "./LoginForm.css";
-import GoogleLogin from 'react-google-login';
-
 
 
 class LoginForm extends React.Component {
@@ -12,7 +10,7 @@ class LoginForm extends React.Component {
     this.state = {
       username: "",
       password: "",
-
+       
 
     };
   }
@@ -22,26 +20,7 @@ class LoginForm extends React.Component {
     e.preventDefault();
     this.props.login(this.state);
   };
-  handlegoogleLogin = (response) => {
-
-    const name = response.ot
-    const usernam = name.qV
-    const pass = name.Ad
-    console.log(response)
-    console.log(this.state.username)
-
-    // this.state.username = usernam
-    // this.state.password = pass
-    {
-      this.setState({
-        username: usernam,
-        password: pass
-      })
-    }
-
-    this.props.login(this.state);
-
-  };
+  
 
 
   handleChange = e => {
@@ -51,9 +30,7 @@ class LoginForm extends React.Component {
   };
 
   render() {
-    const responseGoogle = (response) => {
-      console.log(response);
-    }
+    
     const { loading, error } = this.props;
 
 
@@ -78,20 +55,11 @@ class LoginForm extends React.Component {
             required
             onChange={this.handleChange}
           />
+
           <button className="login-btn" type="submit" disabled={loading}>
             Login
           </button>
-          <GoogleLogin
-
-            clientId="297295278614-v4ft805lmsdjb13c6ir7unogrfp50q8d.apps.googleusercontent.com"
-            buttonText="Login"
-            onSuccess={this.handlegoogleLogin}
-            onSubmit={this.handleLogin}
-            onChange={this.handlegoogleLogin}
-            cookiePolicy={'single_host_origin'}
-
-
-          />,
+         
 
         </form>
 

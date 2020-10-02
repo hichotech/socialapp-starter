@@ -17,6 +17,7 @@ class Message extends React.Component {
         }
         this.client = new DataService()
     }
+    
 
     componentDidMount() {
         const isMyUsername = this.client.getUsername()
@@ -40,7 +41,7 @@ class Message extends React.Component {
 
 
     handleChange = (event) => {
-        console.log(this.props.id)
+        console.log(this.props)
 
 
         this.client.deleteMessages(this.props.id).then(result => { this.setState({ submitted: true }) })
@@ -55,6 +56,7 @@ class Message extends React.Component {
         this.setState({likeCount: this.state.likeCount + 1, messageLikedId: this.props.id, beenLiked: true})
         this.client.postLike(this.props.id)
         console.log(this.state.messageLikedId)
+        
         
     }
 
@@ -76,11 +78,15 @@ class Message extends React.Component {
             if(likesArray[index].username === username) {
                 console.log(likesArray[index].id)
                 this.client.deleteLike(likesArray[index].id)
+                this.setState({likeCount: this.state.likeCount -1, messageLikedId: this.props.id})
+                
             }
             index += 1
         }
        
     }
+   
+
 
     
 
@@ -175,12 +181,12 @@ class Message extends React.Component {
                 <li className='messagesfeed'>
                     <button type="text" onClick={this.handleChange}>delete</button>
 
-                    <div className="date"> At {new Date(this.props.createdAt).toDateString()},
-                {this.props.username} posted:</div>
+                    <div className="date"> posted by : {this.props.username} on : {new Date(this.props.createdAt).toDateString()}
+                 </div>
                     <br />
                     <div className="message-text">{this.props.text}</div>
                     <div className="likes">
-                        {/* <button className='likebutton' onClick={this.handleLike}>&#128077;</button>
+                        {/* <button className='likebutton' onClick={this.handleLike}>&#128077;<span role="img" aria-label="h">&#128077;</span></button>
                         <button className='dislikebutton' onClick={this.handleDislike}>dislike</button> */}
                Likes : {this.state.likeCount}
                     </div>

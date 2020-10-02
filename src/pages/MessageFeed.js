@@ -40,7 +40,7 @@ client = new DataService ()
                 <br />
                 <h2 className='profile-title'>Message Feed</h2>
                 <PostMessage />
-                <a className="back-link-msjfeed" href='/profile/:username'>back to profile</a>
+               
                 
                 <ul>
                     {this.state.messages.map(messageObject => (
