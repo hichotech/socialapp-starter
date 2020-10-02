@@ -7,7 +7,6 @@ class DataService {
         this.client = client;
     }
 
-<<<<<<< HEAD
     uploadImg(image){
         let authData = JSON.parse(localStorage.getItem('login'))
         return this.client.patch(this.url + "/users/"+(authData.result.username), { aboutpictureLocation : image }, {
@@ -20,10 +19,6 @@ class DataService {
     }
     googleLogin(registrationData){
         return this.client.post(this.url + "auth/google/login", registrationData);
-=======
-    googleLogin() {
-        return this.client.get(this.url + "/auth/google/login")
->>>>>>> 869920b2b90c8a2b0f7377cfa1aec62851975698
     }
     registerUser(registrationData) {
         return this.client.post(this.url + "/users", registrationData);
@@ -59,18 +54,12 @@ class DataService {
             headers: {
                 Authorization: `Bearer ${authData.result.token}`,
                 'Content-Type': 'application/json'
-<<<<<<< HEAD
 
 
-=======
-               
-               
->>>>>>> 869920b2b90c8a2b0f7377cfa1aec62851975698
             }
         });
     }
 
-<<<<<<< HEAD
 
 
     deleteMessages(id) {
@@ -103,12 +92,6 @@ class DataService {
     updateUser(message) {
         let authData = JSON.parse(localStorage.getItem('login'))
         return this.client.patch(this.url + "/users/"+(authData.result.username), { about : message }, {
-=======
-    
-    deleteMessages(id) {
-        let authData = JSON.parse(localStorage.getItem('login'))
-        return this.client.delete(this.url + "/messages/" + id, {
->>>>>>> 869920b2b90c8a2b0f7377cfa1aec62851975698
             headers: {
                 Authorization: `Bearer ${authData.result.token}`,
                 'Content-Type': 'application/json'
@@ -117,14 +100,9 @@ class DataService {
     }
 
 
-<<<<<<< HEAD
 
     getFeed(limit = 20) {
 
-=======
-    getFeed(limit = 20) {
-        
->>>>>>> 869920b2b90c8a2b0f7377cfa1aec62851975698
         return this.client.get(`${this.url}/messages?limit=${limit}`)
     }
 

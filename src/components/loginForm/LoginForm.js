@@ -20,32 +20,8 @@ class LoginForm extends React.Component {
     e.preventDefault();
     this.props.login(this.state);
   };
-<<<<<<< HEAD
   
-  
-=======
-  handlegoogleLogin = (response) => {
 
-    const name = response.ot
-    const usernam = name.qV
-    const pass = name.Ad
-    console.log(response)
-    console.log(this.state.username)
-
-    // this.state.username = usernam
-    // this.state.password = pass
-    {
-      this.setState({
-        username: usernam,
-        password: pass
-      })
-    }
-
-    this.props.login(this.state);
-
-  };
-
->>>>>>> 869920b2b90c8a2b0f7377cfa1aec62851975698
 
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
@@ -54,9 +30,7 @@ class LoginForm extends React.Component {
   };
 
   render() {
-    const responseGoogle = (response) => {
-      console.log(response);
-    }
+    
     const { loading, error } = this.props;
 
 
