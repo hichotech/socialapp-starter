@@ -7,9 +7,9 @@ class DataService {
         this.client = client;
     }
 
-    uploadImg(image){
+    uploadImg(image) {
         let authData = JSON.parse(localStorage.getItem('login'))
-        return this.client.patch(this.url + "/users/"+(authData.result.username), { aboutpictureLocation : image }, {
+        return this.client.patch(this.url + "/users/" + (authData.result.username), { aboutpictureLocation: image }, {
             headers: {
                 Authorization: `Bearer ${authData.result.token}`,
                 'Content-Type': 'application/json'
@@ -17,7 +17,7 @@ class DataService {
         });
 
     }
-    googleLogin(registrationData){
+    googleLogin(registrationData) {
         return this.client.post(this.url + "auth/google/login", registrationData);
     }
     registerUser(registrationData) {
@@ -42,7 +42,7 @@ class DataService {
                 Authorization: `Bearer ${authData.result.token}`,
                 'Content-Type': 'application/json'
             }
-           
+
         }).then(console.log(this.state))
             ;
 
@@ -81,7 +81,8 @@ class DataService {
                 Authorization: `Bearer ${authData.result.token}`,
                 'Content-Type': 'application/json'
             }
-        });}
+        });
+    }
 
 
 
@@ -91,7 +92,7 @@ class DataService {
     }
     updateUser(message) {
         let authData = JSON.parse(localStorage.getItem('login'))
-        return this.client.patch(this.url + "/users/"+(authData.result.username), { about : message }, {
+        return this.client.patch(this.url + "/users/" + (authData.result.username), { about: message }, {
             headers: {
                 Authorization: `Bearer ${authData.result.token}`,
                 'Content-Type': 'application/json'
@@ -116,13 +117,9 @@ class DataService {
 
     getUsername() {
         const { username } = store.getState().auth.login.result
-        
+
         return username
     }
-
-
-
-
 
 
     deleteUser(username) {
@@ -135,23 +132,22 @@ class DataService {
         });
     }
 
-
-
-
-
     getToken() {
         const { token } = JSON.parse(localStorage.getItem("login")).result.token
         return token
     }
 
     uploadPicture(formData) {
+        let authData = JSON.parse(localStorage.getItem('login'))
         const url = this.url + `/users/${this.getUsername()}/picture`
         const config = {
             headers: {
-                Authorization: `Bearer ${this.getToken()}`
+                Authorization: `Bearer ${authData.result.token}`,
+                'Content-Type': 'multipart/form-data'
+
             }
         }
-        this.client.put(url, formData, config)
+       return this.client.put(url, formData, config)
     }
 }
 export default DataService;

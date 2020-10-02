@@ -10,23 +10,21 @@ class FileUploader extends React.Component{
     }
 
     createFormData = (event) => {
-        const file = event.taget.files[8]
+        const file = event.target.files[0]
         const formData = new FormData()
         formData.append("picture", file)
-
-        this.setState({ formData })
-        this.upload()
+        this.setState({ formData }, this.upload)
     }
 
     setFallbackImage = event => {
-        event.target.src = ""
+        event.target.src = 'https://w7.pngwing.com/pngs/247/564/png-transparent-computer-icons-user-profile-user-avatar-blue-heroes-electric-blue.png'
     }
 
     upload = () => {
         if (this.state.formData === null) return
 
         this.client.uploadPicture(this.state.formData)
-            .then(response => {
+        .then(response => {
                 if (response.data.statusCode === 200) {
                 this.updatePicture()
             }
@@ -45,13 +43,17 @@ class FileUploader extends React.Component{
                 <input
                     type="file"
                     name="picture"
-                    onChange={this.createFormData}/>                  />
-            
+                    onChange={this.createFormData}
+                    />  
+
+                                   
+           
           
           <div className="image-preview">
                <img
                     alt="user"
                         src={this.state.imageURL}
+                        
                         onError={this.setFallbackImage}
                     width={200}></img>
             </div>
