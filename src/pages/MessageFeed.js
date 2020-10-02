@@ -44,7 +44,7 @@ client = new DataService ()
                 
                 <ul>
                     {this.state.messages.map(messageObject => (
-                        <Message key={messageObject.id} {...messageObject} />
+                        <Message key={messageObject.id} feedType = 'messageFeed' {...messageObject} />
                         
                     ))}
                 </ul>

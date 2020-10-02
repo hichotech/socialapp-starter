@@ -81,7 +81,7 @@ class DataService {
 
     getUsername() {
         const { username } = store.getState().auth.login.result
-        console.log(username)
+        
         return username
     }
 

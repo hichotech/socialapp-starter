@@ -34,7 +34,7 @@ getFeedData = () => {
                 <h2 className='feedtitle'>My Feed</h2>
                 <ul>
                 {this.state.messages.map(messageObject => (
-                        <Message key={messageObject.id} {...messageObject} />
+                        <Message key={messageObject.id} feedType='profileFeed' {...messageObject} />
                         
                         
                     ))}

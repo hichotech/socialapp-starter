@@ -11,10 +11,33 @@ class Message extends React.Component {
         this.state = {
             submitted: false,
             likeCount: this.props.likes.length,
-            messageLikedId: 0
+            messageLikedId: 0,
+            beenLiked: false,
+            myUsername: ''
         }
         this.client = new DataService()
     }
+
+    componentDidMount() {
+        const isMyUsername = this.client.getUsername()
+        this.setState({myUsername: isMyUsername})
+        
+        const username = this.client.getUsername()
+        const likesArray = this.props.likes
+        let index = 0
+        while(index < likesArray.length) {
+          
+
+            if(likesArray[index].username === username) {
+                this.setState({beenLiked: true})
+                
+            }
+            index += 1
+        }
+       
+        
+        }
+
 
     handleChange = (event) => {
         console.log(this.props.id)
@@ -26,16 +49,25 @@ class Message extends React.Component {
 
     handleLike = (event) => {
         
-        this.setState({likeCount: this.state.likeCount + 1, messageLikedId: this.props.id})
+        if(this.state.beenLiked) {
+            return
+        }
+        this.setState({likeCount: this.state.likeCount + 1, messageLikedId: this.props.id, beenLiked: true})
         this.client.postLike(this.props.id)
         console.log(this.state.messageLikedId)
         
     }
 
     handleDislike = (event) => {
+
+        if(!this.state.beenLiked){
+            return
+        }
         console.log(this.props.likes)
         const username = this.client.getUsername()
         const likesArray = this.props.likes
+        console.log(likesArray.length)
+        this.setState({likeCount: this.state.likeCount -1, beenLiked: false})
         let index = 0
         while(index < likesArray.length) {
             console.log(username)
@@ -50,9 +82,7 @@ class Message extends React.Component {
        
     }
 
-    checkLikeArray () {
-        
-    }
+    
 
     render() {
 
@@ -62,8 +92,80 @@ class Message extends React.Component {
 
         }
 
-        
-       
+        if(this.props.username === this.state.myUsername && this.props.feedType === 'messageFeed'){
+            return ( <div className="feedbox">
+
+
+            <li className='messagesfeed'>
+                
+
+                <div className="date"> At {new Date(this.props.createdAt).toDateString()},
+            {this.props.username} posted:</div>
+                <br />
+                <div className="message-text">{this.props.text}</div>
+                <div className="likes">
+                    {/* <button className='likebutton' onClick={this.handleLike}>&#128077;</button> */}
+                    {/* <button className='dislikebutton' onClick={this.handleDislike}>dislike</button> */}
+            Likes: {this.state.likeCount}
+                </div>
+
+
+
+
+            </li>
+        </div>
+           )
+        }
+        if(this.props.feedType === 'messageFeed' && this.state.beenLiked) {
+           return ( <div className="feedbox">
+
+
+            <li className='messagesfeed'>
+                
+
+                <div className="date"> At {new Date(this.props.createdAt).toDateString()},
+            {this.props.username} posted:</div>
+                <br />
+                <div className="message-text">{this.props.text}</div>
+                <div className="likes">
+                    {/* <button className='likebutton' onClick={this.handleLike}>&#128077;</button> */}
+                    <button className='dislikebutton' onClick={this.handleDislike}>dislike</button>
+            : {this.state.likeCount}
+                </div>
+
+
+
+
+            </li>
+        </div>
+           )
+        }
+
+        if(this.props.feedType === 'messageFeed' && !this.state.beenLiked) {
+            return ( <div className="feedbox">
+ 
+ 
+             <li className='messagesfeed'>
+                 
+ 
+                 <div className="date"> At {new Date(this.props.createdAt).toDateString()},
+             {this.props.username} posted:</div>
+                 <br />
+                 <div className="message-text">{this.props.text}</div>
+                 <div className="likes">
+                     <button className='likebutton' onClick={this.handleLike}>&#128077;</button>
+                     {/* <button className='dislikebutton' onClick={this.handleDislike}>dislike</button> */}
+             : {this.state.likeCount}
+                 </div>
+ 
+ 
+ 
+ 
+             </li>
+         </div>
+            )
+         }
+       if(this.props.feedType === 'profileFeed')
         return (
 
 
@@ -78,9 +180,9 @@ class Message extends React.Component {
                     <br />
                     <div className="message-text">{this.props.text}</div>
                     <div className="likes">
-                        <button className='likebutton' onClick={this.handleLike}>&#128077;</button>
-                        <button className='dislikebutton' onClick={this.handleDislike}>dislike</button>
-                : {this.state.likeCount}
+                        {/* <button className='likebutton' onClick={this.handleLike}>&#128077;</button>
+                        <button className='dislikebutton' onClick={this.handleDislike}>dislike</button> */}
+               Likes : {this.state.likeCount}
                     </div>
 
 
