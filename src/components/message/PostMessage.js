@@ -17,11 +17,14 @@ class PostMessage extends React.Component {
 
     
   handleMessage = e => {
+    
     e.preventDefault();
     let message = this.state.text
     console.log(message)
+   
     this.client.postMessage(this.state.text)
     this.setState({text:''})
+    
     
     
   };

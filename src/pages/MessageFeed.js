@@ -9,17 +9,27 @@ class MessageFeed extends React.Component {
 state = {messages: []}
 client = new DataService ()
 
-componentDidMount () {
-    this.client.getFeed().then(response => 
-        this.setState({ messages: response.data.messages})
-    )
-}
-
-
+    intervalId
+    componentDidMount() {
+    this.getFeedData()
+   
+    
+    }
+    componentWillUnmount() {
+        clearTimeout(this.intervalId)
+    }
+    getFeedData = () => {
+        this.client.getFeed().then(response => {
+            this.setState({ messages: response.data.messages })
+            this.intervalId = setTimeout(this.getFeedData.bind(this), 200)
+        }      )
+    }
     render () {
         return (
             
             <div className='messagefeed'>
+                
+        
                                
                                <Menu isAuthenticated={this.props.isAuthenticated} />
                 

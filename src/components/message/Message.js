@@ -17,12 +17,12 @@ class Message extends React.Component {
     }
     
 
-
     handleChange = (event) => {
         console.log(this.props)
 
 
         this.client.deleteMessages(this.props.id).then(result => { this.setState({ submitted: true }) })
+        
     }
 
     handleLike = (event) => {

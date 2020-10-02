@@ -7,12 +7,23 @@ class Userlist extends React.Component {
 state = {users: []}
 client = new DataService ();
 
+intervalId
 componentDidMount () {
+    this.getUserList()
     this.client.getuserlist().then(response => 
         this.setState({users: response.data.users})
     )
 }
+componentWillUnmount() {
+    clearTimeout(this.intervalId)
+}
 
+getUserList = () => {
+    this.client.getuserlist().then(response => 
+        this.setState({users: response.data.users}),
+        this.intervalId = setTimeout(this.getUserList.bind(this), 200))
+          
+}
 
     render () {
         
