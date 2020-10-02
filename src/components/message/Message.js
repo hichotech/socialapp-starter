@@ -15,6 +15,7 @@ class Message extends React.Component {
         }
         this.client = new DataService()
     }
+    
 
 
     handleChange = (event) => {
@@ -30,6 +31,7 @@ class Message extends React.Component {
         this.client.postLike(this.props.id)
         console.log(this.state.messageLikedId)
         
+        
     }
 
     handleDislike = (event) => {
@@ -44,11 +46,14 @@ class Message extends React.Component {
             if(likesArray[index].username === username) {
                 console.log(likesArray[index].id)
                 this.client.deleteLike(likesArray[index].id)
+                this.setState({likeCount: this.state.likeCount -1, messageLikedId: this.props.id})
+                
             }
             index += 1
         }
        
     }
+   
 
 
 

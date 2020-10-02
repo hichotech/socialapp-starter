@@ -17,6 +17,9 @@ class DataService {
         });
 
     }
+    googleLogin(registrationData){
+        return this.client.post(this.url + "auth/google/login", registrationData);
+    }
     registerUser(registrationData) {
         return this.client.post(this.url + "/users", registrationData);
     }

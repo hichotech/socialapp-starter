@@ -12,7 +12,7 @@ componentDidMount () {
     let authData = JSON.parse(localStorage.getItem('login'))
     this.client.getProfileFeed(authData.result.username, 5).then(response => {
         this.setState({ messages: response.data.messages})
-        console.log(response)
+        
     })
 }
 

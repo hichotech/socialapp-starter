@@ -3,6 +3,7 @@ import DataService from "../../DataService"
 import Spinner from "react-spinkit";
 import { withAsyncAction } from "../../redux/HOCs";
 import '../message/messages.css'
+import { Card } from 'antd';
 
 
 
@@ -14,33 +15,38 @@ class UserImage extends React.Component {
       user: {
       
         pictureLocation: "",
+        about:''
       
       },
-      submitted: false
+      
 
     }
     this.client = new DataService();
   }
-
+ 
   componentDidMount () {
     
     this.client.getpicture(this.state.finduser).then(response => {
       this.setState({
         user: response.data.user,
-        submitted: true
+        
       })
+      
 
     })
   }
 
-  addDefaultSrc(ev){
-    ev.target.src = 'https://sd.keepcalms.com/i-w600/no-profile-picture-but-trust-me-i-m-handsome.jpg'
+  addDefaultSrc = e =>{
+    e.target.src = 'https://sd.keepcalms.com/i-w600/no-profile-picture-but-trust-me-i-m-handsome.jpg'
   }
 
   
 
   render() {
+    
     const { loading, error } = this.props;
+    const about = this.state.user
+    const userabout = about.about
     
     let userData = this.state.user
       const imageUrl = "https://socialapp-api.herokuapp.com" + userData.pictureLocation
@@ -57,8 +63,14 @@ class UserImage extends React.Component {
             src={imageUrl}
             alt="user "
             
+            
           />
-          
+            <Card 
+         value={userabout}
+        
+         type="text"
+         name="text"
+         />
           
 
         
