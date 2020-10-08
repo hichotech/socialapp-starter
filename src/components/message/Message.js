@@ -2,7 +2,9 @@ import React from 'react'
 import DataService from '../../DataService'
 import './messages.css'
 import { Link } from "react-router-dom"
-
+import {
+    LikeFilled ,DislikeFilled 
+  } from '@ant-design/icons';
 
 
 class Message extends React.Component {
@@ -135,7 +137,7 @@ class Message extends React.Component {
                 <div className="message-text">{this.props.text}</div>
                 <div className="likes">
                     {/* <button className='likebutton' onClick={this.handleLike}>&#128077;</button> */}
-                    <button className='dislikebutton' onClick={this.handleDislike}>dislike</button>
+                    <DislikeFilled className='dislikebutton' onClick={this.handleDislike}/>
             : {this.state.likeCount}
                 </div>
 
@@ -159,7 +161,7 @@ class Message extends React.Component {
                  <br />
                  <div className="message-text">{this.props.text}</div>
                  <div className="likes">
-                     <button className='likebutton' onClick={this.handleLike}>&#128077;</button>
+                 <LikeFilled  className='likebutton' onClick={this.handleLike}/>
                      {/* <button className='dislikebutton' onClick={this.handleDislike}>dislike</button> */}
              : {this.state.likeCount}
                  </div>
