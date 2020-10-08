@@ -85,3 +85,12 @@ TextArea {
   .resetpage {
     color:darkblue;
   }
+img {
+  display: flex;
+  flex-direction: column;
+justify-self: start;
+  
+  text-indent: -10000px;
+
+  }
+  

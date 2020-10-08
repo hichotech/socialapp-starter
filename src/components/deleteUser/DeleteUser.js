@@ -1,7 +1,6 @@
 import React from "react";
 import DataService from "../../DataService"
 import { Link } from "react-router-dom"
-import Logout from '../../redux/stateReducers/auth/logout'
 import { withAsyncAction } from "../../redux/HOCs";
 
 
@@ -18,20 +17,35 @@ class DeleteUser extends React.Component {
     handleDelete = event => {
         let authData = JSON.parse(localStorage.getItem('login'))
       console.log(authData.result.username)
-      
-      return this.client.deleteUser(authData.result.username).then(result => Logout() )
-      };
+      return this.client.deleteUser(authData.result.username)
+      .then(result => 
+        {this.setState({submitted: true})
+        window.localStorage.removeItem('login') 
+      })
 
-  // {this.setState({submitted: true})}
+}
+calerlocalstorage(){
+  return  window.location.reload().then(window.localStorage.removeItem('login')
+  )
+
+
+}
 render () {
-  if(this.state.submitted) {
-    return(<Link className='resetpage' to='/'>User Deleted</Link>)
+  if(this.state.submitted === true) {
+    
+    return (<Link className='resetpage' onClick={this.calerlocalstorage}> To home page </Link>)
+   
+    
     
   }
     return (
+      
         <div className='DeleteUser'>
         
-                <button type="text" onClick={this.handleDelete}>Delete User</button>
+                <button className='post-msj-btn'  type="text" 
+                    // onSubmit={this.calerlocalstorage} 
+
+                onClick={this.handleDelete} >Delete User</button>
             
         </div>
     )
